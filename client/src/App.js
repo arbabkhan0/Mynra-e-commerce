@@ -1,0 +1,69 @@
+import styled, { ThemeProvider } from "styled-components";
+import { lightTheme } from "./utils/Themes";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import { useState } from "react";
+import Authentication from "./pages/Authentication";
+import ShopListing from "./pages/ShopListing";
+import Favourite from "./pages/Favourite";
+import Cart from "./pages/Cart";
+import ProductDetails from "./pages/ProductDetails";
+import NewArrival from "./pages/NewArrival";
+import Orders from "./pages/Orders";
+import Contact from "./pages/Contact";
+import { useDispatch, useSelector } from "react-redux";
+import ToastMessage from "./components/ToastMessage";
+
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: ${({ theme }) => theme.bg};
+  color: ${({ theme }) => theme.text_primary};
+  overflow: hidden;
+  transition: all 0.2s ease;
+`;
+
+const PageWrapper = styled.div`
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+`;
+
+function App() {
+  const { currentUser } = useSelector((state) => state.user);
+  const { open, message, severity } = useSelector((state) => state.user);
+  const [openAuth, setOpenAuth] = useState(false);
+  return (
+    <ThemeProvider theme={lightTheme}>
+      <BrowserRouter>
+        <Container>
+          <Navbar setOpenAuth={setOpenAuth} currentUser={currentUser} />
+          <PageWrapper>
+            <Routes>
+              <Route path="/" exact element={<Home />} />
+              <Route path="/shop" exact element={<ShopListing />} />
+              <Route path="/favorite" exact element={<Favourite />} />
+              <Route path="/cart" exact element={<Cart />} />
+              <Route path="/shop/:id" exact element={<ProductDetails />} />
+              <Route path="/new_arrivals" exact element={<NewArrival />} />
+              <Route path="/orders" exact element={<Orders />} />
+              <Route path="/contact" exact element={<Contact />} />
+            </Routes>
+          </PageWrapper>
+          {openAuth && (
+            <Authentication openAuth={openAuth} setOpenAuth={setOpenAuth} />
+          )}
+          {open && (
+            <ToastMessage open={open} message={message} severity={severity} />
+          )}
+        </Container>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
+}
+
+export default App;
