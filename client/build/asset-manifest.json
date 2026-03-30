@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Mynra-e-commerce/static/css/main.ab6d90ce.css",
+    "main.js": "/Mynra-e-commerce/static/js/main.43af8aac.js",
+    "static/media/AuthImage.png": "/Mynra-e-commerce/static/media/AuthImage.648864e554bed0aa194f.png",
+    "index.html": "/Mynra-e-commerce/index.html",
+    "main.ab6d90ce.css.map": "/Mynra-e-commerce/static/css/main.ab6d90ce.css.map",
+    "main.43af8aac.js.map": "/Mynra-e-commerce/static/js/main.43af8aac.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ab6d90ce.css",
+    "static/js/main.43af8aac.js"
+  ]
+}
